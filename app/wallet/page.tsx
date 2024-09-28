@@ -6,6 +6,9 @@ const Wallet = () => {
   const {        
     accounts,
     connectWallet,
+    isConnected,
+    getBalance,
+    ethBalance
   } = useConnection();
 
   return (
@@ -23,7 +26,24 @@ const Wallet = () => {
             </button>
 
             <p>
+              Are we connected {isConnected}
+            </p>
+
+            <p 
+              className="mb-4 font-semibold"
+            >
                Egbon ti wale :{accounts[0]}
+            </p>
+
+            <input 
+              className="mb-2 outline-none bg-transparent border-2 p-2 rounded-xl"
+              type="text"
+              placeholder="address"
+              onChange={(e) => getBalance(e.target.value)}
+            />
+
+            <p>
+              YOur eth balance: {ethBalance}
             </p>
        </div>
     </div>

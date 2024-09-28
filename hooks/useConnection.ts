@@ -24,6 +24,8 @@ export function useConnection() {
     })
     const [isConnected, setIsConnected] = useState(false)
     const [ethReady, setEthReady] = useState(false)
+    const [ethBalance, setEthBalance] = useState(0)
+
 
     const connectWallet = async() => {
         if(typeof window.ethereum !== "undefined") {
@@ -47,15 +49,33 @@ export function useConnection() {
         } 
     }
 
+    const getBalance = async(account:any) => {
+        if(typeof window.ethereum !== "undefined") {
+            try {
+                const balance:any = await window.ethereum.request({
+                    method: "eth_getBalance",
+                    params: [account]
+                })
+                setEthBalance(parseInt(balance, 18))
+            } catch (error) {
+                setErrors(error)
+            }
+        }
+    }
+
     const whenConnect = async() => {
         if(typeof window.ethereum !== "undefined") {
             setIsConnected(true)
         }
     }
 
-    const logAccounts = (accounts:any) => {
-        console.log("account change event clean up ", accounts);
+    const connectCleanUp = (accounts:any) => {
+        console.log("connect event clean up ", accounts);
     };
+
+    const whenDisconnect = () => {
+        setIsConnected(false)
+    }
 
     useEffect(() => {
         if(typeof window.ethereum !== "undefined") {
@@ -66,7 +86,7 @@ export function useConnection() {
 
         return() => {
             if(typeof window.ethereum !== "undefined") {
-                window.ethereum.removeListener("accountsChanged", logAccounts)
+                window.ethereum.removeListener("connect", connectCleanUp)
             }
         }
     }, [])
@@ -79,6 +99,8 @@ export function useConnection() {
         connectWallet,
         getChainId,
         isConnected,
-        ethReady
+        ethReady,
+        ethBalance,
+        getBalance
     }
 }
