@@ -5,12 +5,7 @@ import {useConnection} from "../../hooks/useConnection";
 const Wallet = () => {
   const {        
     accounts,
-    chainId,
-    errors,
     connectWallet,
-    getChainId,
-    isConnected,
-    ethReady
   } = useConnection();
 
   return (
