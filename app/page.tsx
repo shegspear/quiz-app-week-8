@@ -21,9 +21,9 @@ export default function Home() {
       id: 2,
       question: "What is Lagos state population ?",
       options: [
-        {id: "1x", selected: false, value: "10 Million"},
-        {id: "2x", selected: false, value: "5 Million"},
-        {id: "3x", selected: false, value: "35 Million"}
+        {id: "5x", selected: false, value: "10 Million"},
+        {id: "6x", selected: false, value: "5 Million"},
+        {id: "7x", selected: false, value: "35 Million"}
       ],
       correctOption: "35 Million"
     },
@@ -31,8 +31,8 @@ export default function Home() {
       id: 3,
       question: "Will Serenity be achieved ?",
       options: [
-        { id: "1x",selected: false, value: "Yes"},
-        {id: "2x", selected: false, value: "No"}
+        { id: "8x",selected: false, value: "Yes"},
+        {id: "9x", selected: false, value: "No"}
       ],
       correctOption: "No"
     },
@@ -42,7 +42,7 @@ export default function Home() {
     selectedOpt:string,
     correctAnswer:string,
     questionId:number,
-    optionIndex:number
+    optionIndex:string
   ) => {
     // console.log('selected idx ', optionIndex)
     // data.forEach((cur:any) => {
@@ -53,11 +53,11 @@ export default function Home() {
     //   }
     // });
     
-    let arr = data;
+    const arr = data;
 
-    arr.forEach((cur:any) => {
+    arr.forEach((cur) => {
         if(cur.id === questionId) {
-          cur.options.forEach((opt:any, idx:number) => {
+          cur.options.forEach((opt) => {
             opt.selected = opt.id === optionIndex ? true : false;
             console.log(`${opt.value} ${opt.selected}`)
           })
@@ -101,8 +101,8 @@ export default function Home() {
         className="w-full px-6 mb-4"
        >
          {
-            data[currentQuestion].options.map((cur:any, idx:number) => (
-              <div className="mb-2 flex flex-row items-center">
+            data[currentQuestion].options.map((cur) => (
+              <div key={cur.id} className="mb-2 flex flex-row items-center">
                 <input
                   className="cursor-pointer rounded-xl h-[18px] w-[18px]" 
                   type={"radio"} 
