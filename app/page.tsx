@@ -64,7 +64,7 @@ export default function Home() {
         }
     });
 
-    setData(arr)
+    // setData(prev => {prev.forEach((cur) => {})})
 
     if(selectedOpt === correctAnswer) {
       setScore((prev) => prev + 1)
