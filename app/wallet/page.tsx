@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 // import {whenConnect} from "../../utils/omnitools";
 
 const Wallet = () => {
-  const [acc, setAcc] = useState("");
+  // const [acc, setAcc] = useState("");
 
   // const connectMe = async () => {
   //   if (typeof window.ethereum !== "undefined") {
@@ -46,9 +46,9 @@ const Wallet = () => {
                 Pablo wa connect
             </button>
 
-            <p>
+            {/* <p>
                Egbon ti wale :{acc}
-            </p>
+            </p> */}
        </div>
     </div>
   )

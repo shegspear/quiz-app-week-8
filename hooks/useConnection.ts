@@ -53,7 +53,7 @@ export function useConnection() {
         }
     }
 
-    const logAccounts = (accounts) => {
+    const logAccounts = (accounts:any) => {
         console.log("account change event clean up ", accounts);
     };
 
