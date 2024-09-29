@@ -6,9 +6,14 @@ const Wallet = () => {
   const {        
     accounts,
     connectWallet,
-    isConnected,
+    connected,
     getBalance,
-    ethBalance
+    ethBalance,
+    chainId,
+    getChainId,
+    chainChanged,
+    currentChain,
+    errors
   } = useConnection();
 
   return (
@@ -20,31 +25,70 @@ const Wallet = () => {
        >
             <button
                 onClick={connectWallet}
-                className='mb-4 border-2 w-[200px] rounded-xl p-4'
+                className='mb-2 border-2 w-[200px] rounded-xl p-4'
             >
                 Pablo wa connect
             </button>
 
-            <p>
-              Are we connected {isConnected}
+            <p
+            className="mb-2 font-semibold text-center"
+            >
+              Are we connected {connected ? "Yes" : "No"}
             </p>
 
             <p 
-              className="mb-4 font-semibold"
+              className="mb-4 font-semibold text-center"
             >
-               Egbon ti wale :{accounts[0]}
+               Egbon ti wole :{accounts[0]}
             </p>
 
             <input 
-              className="mb-2 outline-none bg-transparent border-2 p-2 rounded-xl"
+              className="mb-4 outline-none bg-transparent border-2 p-2 rounded-xl"
               type="text"
               placeholder="address"
               onChange={(e) => getBalance(e.target.value)}
             />
 
-            <p>
+            <p
+            className="mb-4 font-semibold text-center"
+            >
               YOur eth balance: {ethBalance}
             </p>
+
+           <div
+            className="mb-4  flex flex-row items-center justify-center w-full"
+           >
+              <p
+                className="mr-4 font-semibold text-center"
+              >
+                YOur chain ID: {chainId}
+              </p>
+
+              <button
+                onClick={getChainId}
+                className="border-2 p-2 rounded-xl border-slate-500"
+              >
+                Get chain ID
+              </button>
+           </div>
+
+           <div
+            className="flex flex-row items-center justify-center w-full"
+           >
+              <p
+                className="font-semibold text-center"
+              >
+                Changed chain {chainChanged ? "Yes" : "No"}, current chain {currentChain}
+              </p>
+           </div>
+
+           {
+            errors && (
+              <p className="text-red-500 font-bold text-sm">
+                {errors.message}
+              </p>
+            )
+           }
        </div>
     </div>
   )
